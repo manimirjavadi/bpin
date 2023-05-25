@@ -1,4 +1,3 @@
-import React from "react";
 import { ArrowUp, ArrowDown } from "iconsax-react";
 
 type propType = {
