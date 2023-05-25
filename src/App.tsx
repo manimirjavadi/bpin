@@ -4,6 +4,7 @@ import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
 import { ReadyState } from "react-use-websocket";
 import { IApiMarket } from "./interfaces/Markets";
 import MarketCard from "./components/MarketCard";
+import { http } from "./services/http";
 
 interface IState {
   markets: IMarket[];
@@ -59,11 +60,10 @@ function App() {
     const fetchInitialMarketData = async () => {
       let marketPH: Array<IMarket> = [];
       try {
-        const response = await fetch("https://api.bitpin.ir/v1/mkt/markets/");
-        const data = await response.json();
+        const res = await http.fetchMarkets();
 
-        if (data.results) {
-          data.results.map((m: IApiMarket) => {
+        if (res.results) {
+          res.results.map((m: IApiMarket) => {
             marketPH.push({
               change: m.internal_price_info.change,
               created_at: m.internal_price_info.created_at,
