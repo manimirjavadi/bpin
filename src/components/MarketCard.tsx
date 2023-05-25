@@ -24,7 +24,7 @@ function MarketCard({ change, image, price, title }: propType) {
         ) : (
           <ArrowDown size="20" color="#DC2626" />
         )}
-        {price.toLocaleString()}
+        {price.toLocaleString("en-US")}
       </div>
     </div>
   );
