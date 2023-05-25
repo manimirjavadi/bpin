@@ -129,7 +129,7 @@ function App() {
               ) : (
                 <ArrowDown size="20" color="#DC2626" />
               )}
-              {m.price.toLocaleString()}
+              {parseFloat(m.price).toLocaleString()}
             </div>
           </div>
         ))}
