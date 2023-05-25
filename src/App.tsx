@@ -3,7 +3,7 @@ import "./App.css";
 import { useWebSocket } from "react-use-websocket/dist/lib/use-websocket";
 import { ReadyState } from "react-use-websocket";
 import { IApiMarket } from "./interfaces/Markets";
-import { ArrowUp, ArrowDown } from "iconsax-react";
+import MarketCard from "./components/MarketCard";
 
 interface IState {
   markets: IMarket[];
@@ -111,27 +111,16 @@ function App() {
 
   return (
     <>
-      <div className="text-3xl font-bold">Markets list</div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 gap-y-8 py-10">
+      <div className="text-3xl font-bold">Market list</div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 gap-y-8 py-16">
         {state.markets.map((m) => (
-          <div key={m.market_id} className="flex-col">
-            <div className="flex justify-center w-full">
-              <img src={m.image} className="w-32 h-32" />
-            </div>
-            <div className="text-xl font-bold">{m.title}</div>
-            <div
-              className={`${
-                m.change >= 0 ? "text-green-600" : "text-red-600"
-              } text-lg font-bold flex items-center justify-center`}
-            >
-              {m.change >= 0 ? (
-                <ArrowUp size="20" color="#16AD4A" />
-              ) : (
-                <ArrowDown size="20" color="#DC2626" />
-              )}
-              {parseFloat(m.price).toLocaleString()}
-            </div>
-          </div>
+          <MarketCard
+            change={m.change}
+            image={m.image}
+            key={m.market_id}
+            price={parseFloat(m.price)}
+            title={m.title}
+          />
         ))}
       </div>
     </>
